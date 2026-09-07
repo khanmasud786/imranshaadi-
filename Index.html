@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaadi Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            text-align: center;
+            color: #c2185b;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #ad1457;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #f8bbd0;
+            padding-bottom: 15px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group.full-width {
+            flex: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #4a148c;
+            font-size: 0.95rem;
+        }
+
+        label .required {
+            color: #d32f2f;
+            margin-left: 3px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1bee7;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #9c27b0;
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.15);
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            padding: 8px 0;
+        }
+
+        .radio-group label, .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .radio-group input, .checkbox-group input {
+            width: auto;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #c2185b, #880e4f);
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(194, 24, 91, 0.4);
+            background: linear-gradient(135deg, #d81b60, #a01050);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* Error state */
+        .error {
+            border-color: #d32f2f !important;
+            background: #ffebee !important;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .radio-group, .checkbox-group {
+                gap: 12px;
+            }
+        }
+
+        /* Success message */
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            border-left: 5px solid #43a047;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="formContainer">
+        <h1>💍 Shaadi Registration</h1>
+        <p class="subtitle">Apni shaadi ke liye form bharein</p>
+
+        <form id="weddingForm" novalidate>
+            <!-- Personal Details -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Pehla Naam <span class="required">*</span></label>
+                    <input type="text" id="firstName" placeholder="Aapka pehla naam" required>
+                    <div class="error-message" id="firstNameError">Kripya pehla naam daalein</div>
+                </div>
+                <div class="form-group">
+                    <label>Aakhri Naam <span class="required">*</span></label>
+                    <input type="text" id="lastName" placeholder="Aapka aakhri naam" required>
+                    <div class="error-message" id="lastNameError">Kripya aakhri naam daalein</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Janm Tithi <span class="required">*</span></label>
+                    <input type="date" id="dob" required>
+                    <div class="error-message" id="dobError">Kripya janm tithi chunein</div>
+                </div>
+                <div class="form-group">
+                    <label>Ling <span class="required">*</span></label>
+                    <select id="gender" required>
+                        <option value="">Chunein</option>
+                        <option value="male">Purush</option>
+                        <option value="female">Mahila</option>
+                        <option value="other">Any</option>
+                    </select>
+                    <div class="error-message" id="genderError">Kripya ling chunein</div>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Email <span class="required">*</span></label>
+                    <input type="email" id="email" placeholder="example@email.com" required>
+                    <div class="error-message" id="emailError">Kripya sahi email daalein</div>
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number <span class="required">*</span></label>
+                    <input type="tel" id="mobile" placeholder="10 digit mobile number" pattern="[0-9]{10}" required>
+                    <div class="error-message" id="mobileError">Kripya 10 digit mobile number daalein</div>
+                </div>
+            </div>
+
+            <!-- Address -->
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>Pata <span class="required">*</span></label>
+                    <textarea id="address" placeholder="Apna poora pata likhein" required></textarea>
+                    <div class="error-message" id="addressError">Kripya pata daalein</div>
+                </div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Shaadi ki Tarikh <span class="required">*</span></label>
+                    <input type="date" id="weddingDate" required>
+                    <div class="error-message" id="weddingDateError">Kripya shaadi ki tarikh chunein</div>
+                </div>
+                <div class="form-group">
+                    <label>Shaadi ka Type</label>
+                    <select id="weddingType">
+                        <option value="traditional">Traditional</option>
+                        <option value="modern">Modern</option>
+                        <option value="court">Court Marriage</option>
+                        <option value="destination">Destination Wedding</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Mehmano ki Sankhya</label>
+                    <input type="number" id="guests" min="0" placeholder="Kitne mehman?" value="100">
+                </div>
+                <div class="form-group">
+                    <label>Budget (₹)</label>
+                    <input type="number" id="budget" min="0" placeholder="Budget in rupees" value="500000">
+                </div>
+            </div>
+
+            <!-- Radio & Checkbox -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Shaadi ka Kharcha kaun uthayega? <span class="required">*</span></label>
+                    <div class="radio-group" id="expenseGroup">
+                        <label><input type="radio" name="expense" value="self" checked> Khud</label>
+                        <label><input type="radio" name="expense" value="family"> Family</label>
+                        <label><input type="radio" name="expense" value="both"> Dono</label>
+                    </div>
+                    <div class="error-message" id="expenseError">Kripya ek option chunein</div>
+                </div>
+                <div class="form-group">
+                    <label>Special Requests</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="veg"> Veg Food</label>
+                        <label><input type="checkbox" value="nonveg"> Non-Veg</label>
+                        <label><input type="checkbox" value="dj"> DJ</label>
+                        <label><input type="checkbox" value="photography"> Photography</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional -->
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>Koi vishesh sandesh?</label>
+                    <textarea id="message" placeholder="Apna koi special message likhein..."></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>Photo <span class="required">*</span></label>
+                    <input type="file" id="photo" accept="image/*" required>
+                    <div class="error-message" id="photoError">Kripya photo upload karein</div>
+                    <small style="display:block;margin-top:6px;color:#777;">JPG/PNG photo, maximum 5 MB</small>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">✨ Registration Submit Karein</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            ✅ Registration successful! Aapki details save ho gayi hai.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('weddingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('input, select, textarea').forEach(el => el.classList.remove('error'));
+
+            let isValid = true;
+
+            // Helper function to validate
+            function validateField(id, errorId, condition) {
+                const field = document.getElementById(id);
+                const error = document.getElementById(errorId);
+                if (!condition) {
+                    field.classList.add('error');
+                    error.classList.add('show');
+                    isValid = false;
+                }
+                return condition;
+            }
+
+            // Validate each field
+            const firstName = document.getElementById('firstName').value.trim();
+            validateField('firstName', 'firstNameError', firstName.length > 0);
+
+            const lastName = document.getElementById('lastName').value.trim();
+            validateField('lastName', 'lastNameError', lastName.length > 0);
+
+            const dob = document.getElementById('dob').value;
+            validateField('dob', 'dobError', dob !== '');
+
+            const gender = document.getElementById('gender').value;
+            validateField('gender', 'genderError', gender !== '');
+
+            const email = document.getElementById('email').value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            validateField('email', 'emailError', emailPattern.test(email));
+
+            const mobile = document.getElementById('mobile').value.trim();
+            const mobilePattern = /^[0-9]{10}$/;
+            validateField('mobile', 'mobileError', mobilePattern.test(mobile));
+
+            const address = document.getElementById('address').value.trim();
+            validateField('address', 'addressError', address.length > 0);
+
+            const weddingDate = document.getElementById('weddingDate').value;
+            validateField('weddingDate', 'weddingDateError', weddingDate !== '');
+
+            const photo = document.getElementById('photo').files[0];
+            const photoError = document.getElementById('photoError');
+            if (!photo) {
+                photoError.classList.add('show');
+                isValid = false;
+            } else if (!photo.type.startsWith('image/') || photo.size > 5 * 1024 * 1024) {
+                photoError.textContent = 'Kripya 5 MB se chhoti JPG/PNG photo upload karein';
+                photoError.classList.add('show');
+                isValid = false;
+            }
+
+            // Radio validation (expense)
+            const expenseSelected = document.querySelector('input[name="expense"]:checked');
+            const expenseError = document.getElementById('expenseError');
+            if (!expenseSelected) {
+                expenseError.classList.add('show');
+                isValid = false;
+            } else {
+                expenseError.classList.remove('show');
+            }
+
+            // If all valid, show success
+            if (isValid) {
+                document.getElementById('successMessage').classList.add('show');
+                // Optionally, log data
+                const formData = {
+                    firstName,
+                    lastName,
+                    dob,
+                    gender,
+                    email,
+                    mobile,
+                    address,
+                    weddingDate,
+                    weddingType: document.getElementById('weddingType').value,
+                    guests: document.getElementById('guests').value,
+                    budget: document.getElementById('budget').value,
+                    expense: expenseSelected ? expenseSelected.value : '',
+                    specialRequests: Array.from(document.querySelectorAll('.checkbox-group input:checked')).map(cb => cb.value),
+                    message: document.getElementById('message').value.trim(),
+                    photoName: photo ? photo.name : '',
+                    photoSize: photo ? photo.size : 0
+                };
+                console.log('Form Data:', formData);
+                // You can send this data to server via fetch() here
+
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // Scroll to first error
+                const firstError = document.querySelector('.error-message.show');
+                if (firstError) {
+                    firstError.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+
+        document.getElementById('photo').addEventListener('change', function() {
+            const errorEl = document.getElementById('photoError');
+            errorEl.classList.remove('show');
+            this.classList.remove('error');
+        });
+
+        // Real-time validation cleanup
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorEl = document.getElementById(this.id + 'Error');
+                if (errorEl) errorEl.classList.remove('show');
+            });
+            el.addEventListener('change', function() {
+                this.classList.remove('error');
+                const errorEl = document.getElementById(this.id + 'Error');
+                if (errorEl) errorEl.classList.remove('show');
+            });
+        });
+    </script>
+
+</body>
+</html>
