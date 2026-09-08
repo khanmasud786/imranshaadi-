@@ -279,34 +279,6 @@
       color: #1e3c3f;
       font-weight: 500;
     }
-
-    .checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin-top: 0.3rem;
-    }
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      background: #f4eee8;
-      padding: 0.5rem 1.2rem;
-      border-radius: 40px;
-      transition: 0.2s;
-      user-select: none;
-    }
-    .checkbox-item:hover {
-      background: #ede3d9;
-    }
-    .checkbox-item input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: #1e3c3f;
-      cursor: pointer;
-    }
-
     .btn-submit {
       background: #1e3c3f;
       border: none;
@@ -361,9 +333,6 @@
       }
       .panel {
         padding: 1.8rem;
-      }
-      .checkbox-group {
-        gap: 0.8rem;
       }
     }
 
@@ -458,9 +427,28 @@
           </div>
         </div>
 
+        <!-- ✅ Age - अब इसमें टाइप कर सकते हैं (readonly हटा दिया) -->
         <div class="form-group">
           <label><i class="fas fa-user-clock"></i> उम्र (Age)</label>
           <input class="form-control" type="number" name="age" id="age" placeholder="जैसे: 25" min="18" max="100" required>
+        </div>
+
+        <!-- ✅ CASTE SECTION ADDED HERE -->
+        <div class="form-group">
+          <label><i class="fas fa-tag"></i> जाति (Caste)</label>
+          <select class="form-control" name="caste" required>
+            <option value="">-- अपनी जाति चुनें --</option>
+            <option value="General">General</option>
+            <option value="OBC">OBC</option>
+            <option value="SC">SC</option>
+            <option value="ST">ST</option>
+            <option value="Muslim">Muslim</option>
+            <option value="Sikh">Sikh</option>
+            <option value="Christian">Christian</option>
+            <option value="Other">Other</option>
+          </select>
+          <!-- अतिरिक्त टेक्स्ट बॉक्स अगर कोई अपनी जाति लिखना चाहे -->
+          <input class="form-control" type="text" name="caste_other" placeholder="अगर ऊपर नहीं मिला, तो यहाँ लिखें" style="margin-top: 8px;">
         </div>
 
         <div class="row-2col">
@@ -493,37 +481,6 @@
           <div class="form-group">
             <label><i class="fas fa-utensils"></i> वलीमा की तारीख (Walima Date)</label>
             <input class="form-control" type="date" name="walima_date">
-          </div>
-        </div>
-
-        <!-- नए फ़ील्ड: शादी का खर्चा & मेहमान -->
-        <div class="row-2col">
-          <div class="form-group">
-            <label><i class="fas fa-money-bill-wave"></i> शादी का खर्चा कौन उठाएगा? (Budget)</label>
-            <input class="form-control" type="number" name="budget" placeholder="जैसे: 500000" min="0" step="1000">
-          </div>
-          <div class="form-group">
-            <label><i class="fas fa-users"></i> मेहमानों की संख्या</label>
-            <input class="form-control" type="number" name="guest_count" placeholder="जैसे: 200" min="0" step="1">
-          </div>
-        </div>
-
-        <!-- Special Request: Checkbox -->
-        <div class="form-group">
-          <label><i class="fas fa-star"></i> Special Request</label>
-          <div class="checkbox-group">
-            <label class="checkbox-item">
-              <input type="checkbox" name="special_veg" value="Veg Food"> 🥗 Veg Food
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" name="special_nonveg" value="Non-Veg Food"> 🍗 Non-Veg
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" name="special_dj" value="DJ"> 🎵 DJ
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" name="special_photography" value="Photography"> 📸 Photography
-            </label>
           </div>
         </div>
 
